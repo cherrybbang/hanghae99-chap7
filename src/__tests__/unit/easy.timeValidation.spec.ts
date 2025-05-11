@@ -37,3 +37,10 @@ describe('getTimeErrorMessage >', () => {
     expect(result.endTimeError).toBeNull()
   })
 })
+
+// toBeNull()은 값이 null인지 확인
+
+// toBe()는 객체의 (===)을 확인
+// 원시값(string, number, boolean 등)이 정확히 같은지 확인할 때 사용
+
+// 객체나 배열 비교에는 toBe()가 아닌 toEqual() 또는 toStrictEqual()을 사용
