@@ -95,14 +95,62 @@ describe('convertEventToDateRange', () => {
 
 describe('isOverlapping', () => {
   it('두 이벤트가 겹치는 경우 true를 반환한다', () => {
-    const event1 = { date: '2025-07-01', startTime: '10:00', endTime: '12:00' };
-    const event2 = { date: '2025-07-01', startTime: '11:00', endTime: '13:00' };
+    const event1: Event = {
+      id: '1',
+      title: '이벤트 1',
+      date: '2025-07-01',
+      startTime: '10:00',
+      endTime: '12:00',
+      description: '테스트 설명',
+      location: '테스트 장소',
+      category: '테스트 카테고리',
+      repeat: { type: 'none', interval: 1 },
+      notificationTime: 15,
+    };
+
+    const event2: Event = {
+      id: '2',
+      title: '이벤트 2',
+      date: '2025-07-01',
+      startTime: '11:00',
+      endTime: '13:00',
+      description: '테스트 설명',
+      location: '테스트 장소',
+      category: '테스트 카테고리',
+      repeat: { type: 'none', interval: 1 },
+      notificationTime: 15,
+    };
+
     expect(isOverlapping(event1, event2)).toBe(true);
   });
 
   it('두 이벤트가 겹치지 않는 경우 false를 반환한다', () => {
-    const event1 = { date: '2025-07-01', startTime: '10:00', endTime: '11:00' };
-    const event2 = { date: '2025-07-01', startTime: '11:00', endTime: '12:00' };
+    const event1: Event = {
+      id: '1',
+      title: '이벤트 1',
+      date: '2025-07-01',
+      startTime: '10:00',
+      endTime: '11:00',
+      description: '테스트 설명',
+      location: '테스트 장소',
+      category: '테스트 카테고리',
+      repeat: { type: 'none', interval: 1 },
+      notificationTime: 15,
+    };
+
+    const event2: Event = {
+      id: '2',
+      title: '이벤트 2',
+      date: '2025-07-01',
+      startTime: '11:00',
+      endTime: '12:00',
+      description: '테스트 설명',
+      location: '테스트 장소',
+      category: '테스트 카테고리',
+      repeat: { type: 'none', interval: 1 },
+      notificationTime: 15,
+    };
+
     expect(isOverlapping(event1, event2)).toBe(false);
   });
 });
