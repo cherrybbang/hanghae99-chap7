@@ -7,7 +7,6 @@ import {
   getDaysInMonth,
   getEventsForDay,
   getWeekDates,
-  getWeeksAtMonth,
   isDateInRange,
 } from '../../utils/dateUtils';
 
@@ -128,9 +127,42 @@ describe('getWeeksAtMonth', () => {
 
 describe('getEventsForDay', () => {
   const events: Event[] = [
-    { id: '1', title: '이벤트 1', date: '2025-07-01', startTime: '10:00', endTime: '11:00', location: '', description: '' },
-    { id: '2', title: '이벤트 2', date: '2025-07-02', startTime: '12:00', endTime: '13:00', location: '', description: '' },
-    { id: '3', title: '이벤트 3', date: '2025-08-01', startTime: '14:00', endTime: '15:00', location: '', description: '' },
+    {
+      id: '1',
+      title: '이벤트 1',
+      date: '2025-07-01',
+      startTime: '10:00',
+      endTime: '11:00',
+      location: '',
+      description: '',
+      category: '',
+      repeat: undefined as any,
+      notificationTime: '' as any,
+    },
+    {
+      id: '2',
+      title: '이벤트 2',
+      date: '2025-07-02',
+      startTime: '12:00',
+      endTime: '13:00',
+      location: '',
+      description: '',
+      category: '',
+      repeat: undefined as any,
+      notificationTime: '' as any,
+    },
+    {
+      id: '3',
+      title: '이벤트 3',
+      date: '2025-08-01',
+      startTime: '14:00',
+      endTime: '15:00',
+      location: '',
+      description: '',
+      category: '',
+      repeat: undefined as any,
+      notificationTime: '' as any,
+    },
   ];
 
   it('특정 날짜(1일)에 해당하는 이벤트만 정확히 반환한다', () => {
