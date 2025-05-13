@@ -17,6 +17,11 @@ export default mergeConfig(
         },
       },
     },
+    define: {
+      'process.env': {
+        VITE_API_BASE_URL: API_BASE_URL,
+      },
+    },
   }),
   defineTestConfig({
     test: {
