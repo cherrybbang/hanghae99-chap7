@@ -1,39 +1,42 @@
-import { http, HttpResponse } from 'msw';
+import { rest } from 'msw';
 
 import { events } from '../__mocks__/response/events.json' assert { type: 'json' };
 import { Event } from '../types';
 
 export const handlers = [
-  http.get('/api/events', () => {
-    return HttpResponse.json({ events });
+  rest.get('/api/events', (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json({ events }));
   }),
 
-  http.post('/api/events', async ({ request }) => {
-    const newEvent = (await request.json()) as Event;
+  rest.post('/api/events', async (req, res, ctx) => {
+    const newEvent = (await req.json()) as Event;
     newEvent.id = String(events.length + 1);
-    return HttpResponse.json(newEvent, { status: 201 });
+    events.push(newEvent);
+    return res(ctx.status(201), ctx.json(newEvent));
   }),
 
-  http.put('/api/events/:id', async ({ params, request }) => {
-    const { id } = params;
-    const updatedEvent = (await request.json()) as Event;
+  rest.put('/api/events/:id', async (req, res, ctx) => {
+    const { id } = req.params;
+    const updatedEvent = (await req.json()) as Event;
     const index = events.findIndex((event) => event.id === id);
 
     if (index !== -1) {
-      return HttpResponse.json({ ...events[index], ...updatedEvent });
+      events[index] = { ...events[index], ...updatedEvent };
+      return res(ctx.status(200), ctx.json(events[index]));
     }
 
-    return new HttpResponse(null, { status: 404 });
+    return res(ctx.status(404));
   }),
 
-  http.delete('/api/events/:id', ({ params }) => {
-    const { id } = params;
+  rest.delete('/api/events/:id', (req, res, ctx) => {
+    const { id } = req.params;
     const index = events.findIndex((event) => event.id === id);
 
     if (index !== -1) {
-      return new HttpResponse(null, { status: 204 });
+      events.splice(index, 1);
+      return res(ctx.status(204));
     }
 
-    return new HttpResponse(null, { status: 404 });
+    return res(ctx.status(404));
   }),
 ];
