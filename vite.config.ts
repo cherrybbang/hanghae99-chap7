@@ -4,6 +4,7 @@ import { defineConfig as defineTestConfig, mergeConfig } from 'vitest/config';
 
 export default mergeConfig(
   defineConfig({
+    base: '/hanghae99-chap7/',
     plugins: [react()],
     server: {
       proxy: {
