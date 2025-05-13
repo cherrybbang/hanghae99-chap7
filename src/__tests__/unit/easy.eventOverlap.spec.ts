@@ -163,9 +163,9 @@ describe('findOverlappingEvents', () => {
       date: '2025-07-01',
       startTime: '09:00',
       endTime: '10:00',
-      description: '',
-      location: '',
-      category: '',
+      description: '테스트 설명 1',
+      location: '테스트 장소 1',
+      category: '테스트 카테고리 1',
       repeat: { type: 'none', interval: 1 },
       notificationTime: 15,
     },
@@ -175,9 +175,9 @@ describe('findOverlappingEvents', () => {
       date: '2025-07-01',
       startTime: '09:30',
       endTime: '11:00',
-      description: '',
-      location: '',
-      category: '',
+      description: '테스트 설명 2',
+      location: '테스트 장소 2',
+      category: '테스트 카테고리 2',
       repeat: { type: 'none', interval: 1 },
       notificationTime: 15,
     },
@@ -187,30 +187,42 @@ describe('findOverlappingEvents', () => {
       date: '2025-07-01',
       startTime: '11:30',
       endTime: '12:30',
-      description: '',
-      location: '',
-      category: '',
+      description: '테스트 설명 3',
+      location: '테스트 장소 3',
+      category: '테스트 카테고리 3',
       repeat: { type: 'none', interval: 1 },
       notificationTime: 15,
     },
   ];
   it('새 이벤트와 겹치는 모든 이벤트를 반환한다', () => {
-    const newEvent = {
+    const newEvent: Event = {
       id: '999',
+      title: '새 이벤트',
       date: '2025-07-01',
       startTime: '09:45',
       endTime: '10:15',
+      description: '새 이벤트 설명',
+      location: '새 이벤트 장소',
+      category: '새 이벤트 카테고리',
+      repeat: { type: 'none', interval: 1 },
+      notificationTime: 15,
     };
     const result = findOverlappingEvents(newEvent, events);
     expect(result.map((e) => e.id)).toEqual(['1', '2']);
   });
 
   it('겹치는 이벤트가 없으면 빈 배열을 반환한다', () => {
-    const newEvent = {
+    const newEvent: Event = {
       id: '999',
+      title: '새 이벤트',
       date: '2025-07-01',
       startTime: '13:00',
       endTime: '14:00',
+      description: '새 이벤트 설명',
+      location: '새 이벤트 장소',
+      category: '새 이벤트 카테고리',
+      repeat: { type: 'none', interval: 1 },
+      notificationTime: 15,
     };
     const result = findOverlappingEvents(newEvent, events);
     expect(result).toEqual([]);
