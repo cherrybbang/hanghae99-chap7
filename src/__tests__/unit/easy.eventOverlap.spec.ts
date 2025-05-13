@@ -31,9 +31,19 @@ describe('parseDateTime', () => {
 describe('convertEventToDateRange', () => {
   it('일반적인 이벤트를 올바른 시작 및 종료 시간을 가진 객체로 변환한다', () => {
     const event = {
+      id: '1',
+      title: '테스트 이벤트',
       date: '2025-07-01',
       startTime: '09:00',
       endTime: '11:00',
+      description: '테스트 설명',
+      location: '테스트 장소',
+      category: '테스트 카테고리',
+      repeat: { 
+        type: 'none' as any, // RepeatType으로 명시적으로 지정
+        interval: 1,
+      },
+      notificationTime: 15,
     };
     const result = convertEventToDateRange(event);
     expect(result.start.toISOString()).toBe(new Date('2025-07-01T09:00').toISOString());
@@ -42,9 +52,19 @@ describe('convertEventToDateRange', () => {
 
   it('잘못된 날짜 형식의 이벤트에 대해 Invalid Date를 반환한다', () => {
     const event = {
+      id: '2',
+      title: '잘못된 날짜 이벤트',
       date: 'invalid-date',
       startTime: '09:00',
       endTime: '11:00',
+      description: '테스트 설명',
+      location: '테스트 장소',
+      category: '테스트 카테고리',
+      repeat: { 
+        type: 'none' as any, // RepeatType으로 명시적으로 지정
+        interval: 1,
+      },
+      notificationTime: 15,
     };
     const result = convertEventToDateRange(event);
     expect(result.start.toString()).toBe('Invalid Date');
@@ -53,9 +73,19 @@ describe('convertEventToDateRange', () => {
 
   it('잘못된 시간 형식의 이벤트에 대해 Invalid Date를 반환한다', () => {
     const event = {
+      id: '3',
+      title: '잘못된 시간 이벤트',
       date: '2025-07-01',
       startTime: 'not-time',
       endTime: 'also-bad',
+      description: '테스트 설명',
+      location: '테스트 장소',
+      category: '테스트 카테고리',
+      repeat: { 
+        type: 'none' as any, // RepeatType으로 명시적으로 지정
+        interval: 1,
+      },
+      notificationTime: 15,
     };
     const result = convertEventToDateRange(event);
     expect(result.start.toString()).toBe('Invalid Date');
